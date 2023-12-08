@@ -8,11 +8,13 @@ import 'package:flutter_assignment/views/settings/sub_setting_view.dart';
 import 'package:flutter_assignment/views/wrapper/main_wrapper.dart';
 
 class AppNavigation {
+  // Private constructor to prevent accidental instantiation
   AppNavigation._();
 
+  // Initial location for the app
   static String initial = "/home";
 
-  // Private navigators
+  // Private navigators for each branch
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHome =
       GlobalKey<NavigatorState>(debugLabel: 'shellHome');
@@ -33,7 +35,7 @@ class AppNavigation {
           );
         },
         branches: <StatefulShellBranch>[
-          /// Brach Home
+          /// Branch Home
           StatefulShellBranch(
             navigatorKey: _shellNavigatorHome,
             routes: <RouteBase>[
@@ -59,7 +61,7 @@ class AppNavigation {
             ],
           ),
 
-          /// Brach Setting
+          /// Branch Setting
           StatefulShellBranch(
             navigatorKey: _shellNavigatorSettings,
             routes: <RouteBase>[

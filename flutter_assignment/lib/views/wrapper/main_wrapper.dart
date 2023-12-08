@@ -5,8 +5,9 @@ import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 class MainWrapper extends StatefulWidget {
   const MainWrapper({
     required this.navigationShell,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
+
   final StatefulNavigationShell navigationShell;
 
   @override
@@ -14,8 +15,10 @@ class MainWrapper extends StatefulWidget {
 }
 
 class _MainWrapperState extends State<MainWrapper> {
+  // Variable to track the selected index in the bottom navigation bar
   int selectedIndex = 0;
 
+  // Function to navigate to a specific branch based on the selected index
   void _goBranch(int index) {
     widget.navigationShell.goBranch(
       index,
@@ -26,20 +29,26 @@ class _MainWrapperState extends State<MainWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Body: Contains the main content of the screen
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: widget.navigationShell,
       ),
+      // FloatingActionButton: Button for navigating to the 'Player' location
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.push(context.namedLocation('Player'));
-          },
-          backgroundColor: Colors.deepPurpleAccent,
-          child: const Icon(Icons.map)),
+        onPressed: () {
+          // Push to the 'Player' location when the button is pressed
+          context.push(context.namedLocation('Player'));
+        },
+        backgroundColor: Colors.deepPurpleAccent,
+        child: const Icon(Icons.map),
+      ),
+      // BottomNavigationBar: SlidingClippedNavBar for navigation between home and notes
       bottomNavigationBar: SlidingClippedNavBar(
         backgroundColor: Colors.white,
         onButtonPressed: (index) {
+          // Update the selected index and navigate to the corresponding branch
           setState(() {
             selectedIndex = index;
           });
@@ -48,6 +57,7 @@ class _MainWrapperState extends State<MainWrapper> {
         iconSize: 30,
         activeColor: Colors.black,
         selectedIndex: selectedIndex,
+        // Define the items in the bottom navigation bar
         barItems: [
           BarItem(
             icon: Icons.home,
